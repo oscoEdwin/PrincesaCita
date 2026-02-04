@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Atrapa el corazón 💖</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to top right, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+    #corazon {
+      position: absolute;
+      font-size: 12vw;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    #mensaje {
+      position: absolute;
+      top: 25%;
+      text-align: center;
+      font-size: 6vw;
+      color: white;
+      text-shadow: 2px 2px 5px #c94b4b;
+      display: none;
+    }
+    #formulario {
+      position: absolute;
+      top: 55%;
+      text-align: center;
+      display: none;
+      width: 80%;
+    }
+    input {
+      padding: 15px;
+      font-size: 1.2em;
+      border-radius: 8px;
+      border: none;
+      width: 90%;
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      background: #25D366;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #128C7E;
+    }
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    #modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 80%;
+      font-size: 1.5em;
+      color: #c94b4b;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      animation: aparecer 0.5s ease-in-out;
+    }
+    @keyframes aparecer {
+      from {transform: scale(0.7); opacity: 0;}
+      to {transform: scale(1); opacity: 1;}
+    }
+    #modal button {
+      margin-top: 15px;
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    #modal button:hover {
+      background: #128C7E;
+    }
+  </style>
+</head>
+<body>
+  <!-- Música de fondo -->
+  <audio autoplay loop>
+    <source src="Sonyk El Dragón - Me Muero Por Ti - Sonyk El Dragón.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
+
+  <div id="corazon">❤️</div>
+  <div id="mensaje">¡Ganaste! 🎉<br>El premio es una cita conmigo 💕</div>
+
+  <div id="formulario">
+    <input type="text" id="respuesta" placeholder="Escribe cuándo tienes tiempo 💌">
+    <br>
+    <button onclick="mostrarModal()">Enviar</button>
+  </div>
+
+  <div id="modal">
+    <div id="modal-content">
+      <p>Te extraño mucho 💖<br>Por eso quiero invitarte a salir conmigo 🌹</p>
+      <button onclick="enviarWhatsApp()">Aceptar y enviar</button>
+    </div>
+  </div>
+
+  <script>
+    const corazon = document.getElementById("corazon");
+    const mensaje = document.getElementById("mensaje");
+    const formulario = document.getElementById("formulario");
+    const modal = document.getElementById("modal");
+
+    function moverCorazon() {
+      const x = Math.random() * (window.innerWidth - corazon.offsetWidth);
+      const y = Math.random() * (window.innerHeight - corazon.offsetHeight);
+      corazon.style.left = x + "px";
+      corazon.style.top = y + "px";
+    }
+
+    setInterval(moverCorazon, 1000);
+
+    corazon.addEventListener("click", () => {
+      corazon.style.display = "none";
+      mensaje.style.display = "block";
+      setTimeout(() => {
+        formulario.style.display = "block";
+      }, 2000);
+    });
+
+    moverCorazon();
+
+    function mostrarModal() {
+      modal.style.display = "flex";
+    }
+
+    function enviarWhatsApp() {
+      const texto = document.getElementById("respuesta").value;
+      const numero = "59169726081"; // <-- coloca aquí tu número en formato internacional
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+      window.open(url, "_blank");
+      modal.style.display = "none";
+    }
+  </script>
+</body>
+</html>
